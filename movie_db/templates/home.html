@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Home - Movie Database
+{% endblock %}
+
+{% block page_header %}
+  <div class="bg-primary text-white py-5 mb-4">
+    <div class="container text-center">
+      <h1 class="display-4">🎬 Welcome to Movie Database</h1>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-9">
+      {% if movies %}
+        <div class="row">
+          {% for movie in movies %}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card h-100 shadow-sm">
+                {% if movie.poster %}
+                  <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}" style="height: 300px; object-fit: cover;" />
+                {% else %}
+                  <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
+                    <span class="text-muted">No Image</span>
+                  </div>
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">{{ movie.title }}</h5>
+                  <p class="card-text flex-grow-1">{{ movie.description|truncatewords:10 }}</p>
+                  <div class="mt-auto">
+                    <a href="{% url 'movie_info' movie.id %}" class="btn btn-primary">View Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="text-center py-5">
+          <i class="bi bi-film" style="font-size: 4rem; color: #6c757d;"></i>
+          <h3 class="text-muted mt-3">No movies available yet</h3>
+          <p>Check back later for exciting movie content!</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="col-md-3">
+      <!-- Stats Card -->
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5 class="mb-0">Quick Stats</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mb-0">
+            <li class="d-flex justify-content-between mb-2">
+              <span>Total Movies:</span>
+              <strong>{{ total_movies|default:0 }}</strong>
+            </li>
+            <li class="d-flex justify-content-between mb-2">
+              <span>Registered Users:</span>
+              <strong>{{ total_users|default:0 }}</strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

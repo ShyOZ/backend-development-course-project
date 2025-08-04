@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Login - Movie Database
+{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-5">
+          <div class="text-center mb-4">
+            <h2 class="h3 mb-3 fw-normal">🎬 Sign in</h2>
+          </div>
+
+          <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+
+            <!-- Username Field -->
+            <div class="form-floating mb-3">
+              {{ form.username }}
+              <label for="{{ form.username.id_for_label }}">Username</label>
+              {% if form.username.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.username.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-floating mb-3">
+              {{ form.password }}
+              <label for="{{ form.password.id_for_label }}">Password</label>
+              {% if form.password.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.password.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Remember Me Checkbox -->
+            <div class="form-check mb-3">
+              {{ form.remember_me }}
+              <label class="form-check-label" for="{{ form.remember_me.id_for_label }}">Remember me</label>
+            </div>
+
+            <!-- Non-field errors (e.g., invalid login) -->
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Sign In</button>
+
+            <!-- Sign up link -->
+            <div class="text-center">
+              <p class="mb-0">
+                Don't have an account?
+                <a href="{% url 'signup' %}" class="text-decoration-none">Sign up here</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/forms.css' %}" />
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ movie.title }} - Movie Database
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <!-- Movie Poster -->
+      <div class="card">
+        {% if movie.poster %}
+          <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}" style="height: 500px; object-fit: cover;" />
+        {% else %}
+          <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 500px;">
+            <span class="text-muted">No Poster Available</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <!-- Movie Information -->
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">{{ movie.title }}</h1>
+
+          {% if movie_details %}
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <strong>Director:</strong>
+              </div>
+              <div class="col-sm-9">{{ movie_details.director }}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <strong>Main Actors:</strong>
+              </div>
+              <div class="col-sm-9">
+                {{ movie_details.actor1 }}
+                {% if movie_details.actor2 %}
+                  , {{ movie_details.actor2 }}
+                {% endif %}
+                {% if movie_details.actor3 %}
+                  , {{ movie_details.actor3 }}
+                {% endif %}
+                {% if movie_details.actor4 %}
+                  , {{ movie_details.actor4 }}
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <strong>Year of release:</strong>
+              </div>
+              <div class="col-sm-9">{{ movie_details.year }}</div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-sm-3">
+                <strong>Description:</strong>
+              </div>
+              <div class="col-sm-9">{{ movie.description }}</div>
+            </div>
+          {% else %}
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <strong>Something's gone wrong</strong>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Sign Up - Movie Database
+{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-5">
+          <div class="text-center mb-4">
+            <h2 class="h3 mb-3 fw-normal">🎬 Create Account</h2>
+          </div>
+
+          <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <!-- Username Field -->
+            <div class="form-floating mb-3">
+              {{ form.username }}
+              <label for="{{ form.username.id_for_label }}">Username</label>
+              {% if form.username.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.username.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-floating mb-3">
+              {{ form.password1 }}
+              <label for="{{ form.password1.id_for_label }}">Password</label>
+              {% if form.password1.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.password1.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-floating mb-3">
+              {{ form.password2 }}
+              <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+              {% if form.password2.errors %}
+                <div class="invalid-feedback d-block">
+                  {% for error in form.password2.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Non-field errors -->
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success btn-lg w-100 mb-3">Create Account</button>
+
+            <!-- Sign in link -->
+            <div class="text-center">
+              <p class="mb-0">
+                Already have an account?
+                <a href="{% url 'login' %}" class="text-decoration-none">Sign in here</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/forms.css' %}" />
+{% endblock %}
