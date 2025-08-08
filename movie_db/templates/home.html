@@ -20,8 +20,9 @@
           {% for movie in movies %}
             <div class="col-md-6 col-lg-4 mb-4">
               <div class="card h-100 shadow-sm">
-                <a href="{% url 'movie_info' movie.id %}">
-                  <img src="{{ movie.poster.url }}" class="card-body" alt="{{ movie.title }}" style="height: 300px; object-fit: cover;" /></a>
+                <a href="{% url 'movie_info' movie.id %}" class="d-flex align-items-center justify-content-center h-100">
+                  <img src="{{ movie.poster.url }}" class="card-img-top" alt="{{ movie.title }}" style="height: 400px; object-fit: cover; width: 100%;" />
+                </a>
               </div>
             </div>
           {% endfor %}

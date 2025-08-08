@@ -9,4 +9,8 @@ urlpatterns = [
     # Movie URLs
     path("", views.home, name="home"),
     path("movie/<int:movie_id>/", views.movie_info, name="movie_info"),
+    # Review URLs
+    path("movie/<int:movie_id>/review/add/", views.add_review, name="add_review"),
+    path("movie/<int:movie_id>/review/edit/", views.edit_review, name="edit_review"),
+    path("movie/<int:movie_id>/review/delete/", views.delete_review, name="delete_review"),
 ]

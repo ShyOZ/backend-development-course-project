@@ -3,16 +3,17 @@
 ***The project and this file will be updated as the course progresses***
 
 ## The Subject
-Building a [Django](https://www.djangoproject.com) web application that serves as a movie database system. The application currently allows users to register, authenticate, and browse movies.
+Building a [Django](https://www.djangoproject.com) web application that serves as a movie database system. Users can register, authenticate, browse movies, and write reviews with ratings.
 
 ## The Concepts
-This project consolidates all Django concepts learned throughout the course by implementing a full-featured web application. Currently, The main features include:
+This project consolidates all Django concepts learned throughout the course by implementing a full-featured web application. The main features include:
 1. User authentication system with custom login and signup forms
 2. Movie database with image upload capabilities
-3. CRUD operations for movie management (admin panel only)
+3. Movie review system with 1-5 star ratings and text reviews
 4. User session management and access control
-5. Template inheritance and dynamic content rendering
-6. Media file handling for movie posters
+5. CRUD operations for movie management (admin panel only)
+6. Template inheritance and dynamic content rendering
+7. Media file handling for movie posters
 
 The project demonstrates Django's Model-View-Template (MVT) architecture, database relationships, form handling, user authentication, and media file management.
 

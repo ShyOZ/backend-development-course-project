@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+from .models import Review
 
 FORM_CSS_CLASS = "form-control form-control-lg"
 
@@ -97,3 +98,31 @@ class CustomSignupForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class ReviewForm(forms.ModelForm):
+    rating = forms.ChoiceField(
+        choices=Review.RATING_CHOICES,
+        widget=forms.Select(
+            attrs={
+                "class": FORM_CSS_CLASS,
+            }
+        ),
+        help_text="Rate this movie from 1 to 5 stars"
+    )
+    
+    review_text = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "class": FORM_CSS_CLASS,
+                "placeholder": "Share your thoughts about this movie...",
+                "rows": 4,
+            }
+        ),
+        required=False,
+        help_text="Optional: Write a detailed review"
+    )
+    
+    class Meta:
+        model = Review
+        fields = ['rating', 'review_text']
